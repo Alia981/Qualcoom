@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION 3.10.2)
+
+# Set SNPE paths (adjust to your SNPE installation)
+set(SNPE_ROOT $ENV{SNPE_ROOT})  # e.g., /path/to/snpe-2.35.0
+set(SNPE_LIBS ${SNPE_ROOT}/lib/aarch64-android)
+set(SNPE_INCLUDES ${SNPE_ROOT}/include)
+
+# Add SNPE libraries
+link_directories(${SNPE_LIBS})
+
+project("bert-sentiment")
+
+add_library( # Sets the name of the library.
+             native-lib
+
+             # Sets the library as a shared library.
+             SHARED
+
+             # Provides a relative path to your source file(s).
+             native-lib.cpp )
+
+find_library( log-lib log )
+
+# Link SNPE libraries (add more as needed: snpe, sps, etc.)
+target_link_libraries( # Specifies the target library.
+                       native-lib
+
+                       # Links the target library to the log library
+                       # included in the NDK.
+                       ${log-lib}
+
+                       # SNPE runtime libs for Android
+                       snpe
+                       sps
+                       adsprpc
+                       hexagon_controller
+                       hexagon_nn_hexagon
+                       hexagon_remote
+                       libgomp
+                       openmp
+                       ${SNPE_ROOT}/lib/aarch64-android/libstdc++_shared.so )  # If needed
+
+target_include_directories(native-lib PRIVATE ${SNPE_INCLUDES})

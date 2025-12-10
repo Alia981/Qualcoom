@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Qualcomm BERT Sentiment Analyzer</string>
+    <string name="input_hint">Enter text for sentiment analysis...</string>
+    <string name="analyze_button">Analyze Sentiment</string>
+    <string name="result_label">Sentiment:</string>
+    <string name="positive">Positive</string>
+    <string name="negative">Negative</string>
+    <string name="neutral">Neutral</string>
+    <string name="error_model">Model loading failed</string>
+</resources>
